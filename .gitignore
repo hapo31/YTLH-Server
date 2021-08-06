@@ -1,4 +1,8 @@
 node_modules
 .env
+.cache
+.parcel-cache
+
 yarn-error.log
 migrations
+dist
