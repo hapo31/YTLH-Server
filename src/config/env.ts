@@ -8,7 +8,7 @@ const env = {
   port: process.env["PORT"],
   clientId: process.env["GOOGLE_CLIENT_ID"],
   clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-  redirectUriBase: process.env["REDIRECT_URI_BASE"]
+  redirectUriBase: process.env["REDIRECT_URI_BASE"],
 };
 
 export default env;
