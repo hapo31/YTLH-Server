@@ -10,6 +10,7 @@ const scope = encodeURIComponent(
 const app = express();
 
 const redirectUri = encodeURIComponent(
+  env.redirectUri ??
   `${env.redirectUriBase}:${env.port}/redirect`
 );
 const clientId = env.clientId;
