@@ -45,8 +45,8 @@ app.get("/redirect", async (req, res) => {
     null,
     `<html>
     <head>
-      <script>
-        window.oauth_info = ${JSON.stringify(oauthInfoObj)}
+      <script id="credentials">
+        ${JSON.stringify(oauthInfoObj)}
       </script>
     </head>
     <body>
