@@ -5,6 +5,10 @@ import cors from "cors";
 
 import { error, success } from "./utils/responseTool";
 
+const isDev = process.env.NODE_ENV === "development";
+
+const serveStaticPath = isDev ? "public" : "./";
+
 const scope = encodeURIComponent(
   ["https://www.googleapis.com/auth/youtube"].join(" ")
 );
@@ -17,9 +21,9 @@ const redirectUri = encodeURIComponent(
 const clientId = env.clientId;
 const secret = env.clientSecret;
 
-app.use(express.static("public"));
+app.use(express.static(serveStaticPath));
 
-app.use("/privacy_policy", express.static("public"));
+app.use("/privacy_policy", express.static(serveStaticPath));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(

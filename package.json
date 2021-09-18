@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node ./src/index.ts",
+    "dev": "NODE_ENV=development ts-node ./src/index.ts",
     "watch:page": "parcel watch -d public ./src/page/index.html",
-    "build": "NODE_ENV=production parcel build ./src/index.ts --target node && parcel build ./src/page/index.html && rm ./dist/*.map",
+    "build": "NODE_ENV=production parcel build ./src/index.ts --target node && parcel build ./src/page/index.html -d dist/public && rm ./dist/*.map",
     "start": "node ./dist/index.js",
     "format:fix": "prettier-eslint --write $PWD/'src/**/*.ts'"
   },
