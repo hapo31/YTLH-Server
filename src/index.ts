@@ -12,16 +12,19 @@ const scope = encodeURIComponent(
 const app = express();
 
 const redirectUri = encodeURIComponent(
-  env.redirectUri ??
-  `${env.redirectUriBase}:${env.port}/redirect`
+  env.redirectUri ?? `${env.redirectUriBase}:${env.port}/redirect`
 );
 const clientId = env.clientId;
 const secret = env.clientSecret;
 
+app.use(express.static("public"));
+
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-  origin: "*"
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.post("/authorize", (req, res) => {
   const oauth2Url = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code&access_type=offline&approval_prompt=force`;
@@ -53,7 +56,9 @@ app.get("/redirect", async (req, res) => {
     `<html>
     <body>
       OK
-      <div id="credentials" style="display:none;">${JSON.stringify(oauthInfoObj)}</div>
+      <div id="credentials" style="display:none;">${JSON.stringify(
+        oauthInfoObj
+      )}</div>
     </body>
   </html>`
   );
@@ -68,11 +73,10 @@ app.post("/token", async (req, res) => {
   const response = await fetch("https://www.googleapis.com/oauth2/v4/token", {
     method: "post",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: `client_id=${clientId}&client_secret=${secret}&refresh_token=${refreshToken}&grant_type=refresh_token`,
   });
-
 
   const data = await response.json();
   success(res, data);
@@ -81,4 +85,3 @@ app.post("/token", async (req, res) => {
 app.listen(env.port);
 
 console.info("server listening.");
-console.info("info", env);
