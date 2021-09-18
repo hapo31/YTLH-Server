@@ -1,13 +1,14 @@
 import express from "express";
 import fetch from "node-fetch";
-import env from "./config/env";
+import path from "path";
 import cors from "cors";
+import env from "./config/env";
 
 import { error, success } from "./utils/responseTool";
 
 const isDev = process.env.NODE_ENV === "development";
 
-const serveStaticPath = "public";
+const serveStaticPath = path.join(isDev ? "" : __dirname, "public");
 
 const scope = encodeURIComponent(
   ["https://www.googleapis.com/auth/youtube"].join(" ")
