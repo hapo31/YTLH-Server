@@ -7,7 +7,7 @@ import { error, success } from "./utils/responseTool";
 
 const isDev = process.env.NODE_ENV === "development";
 
-const serveStaticPath = isDev ? "public" : "./";
+const serveStaticPath = "public";
 
 const scope = encodeURIComponent(
   ["https://www.googleapis.com/auth/youtube"].join(" ")
