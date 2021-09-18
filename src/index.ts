@@ -19,6 +19,8 @@ const secret = env.clientSecret;
 
 app.use(express.static("public"));
 
+app.use("/privacy_policy", express.static("public"));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
